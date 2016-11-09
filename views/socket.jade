@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  script(type="text/javascript")
+    include ../public/javascripts/socket.js
+
+  section
+    article
+      header
+        h1   Testing NodeJs - Express - Socket.io - Mysql - RabbitMQ
+        div.flatbuttoncontainer
+
+      h3 Content
+      ul
+        li  Add list to Mysql database, use socket protocol and #[a(href="https://www.rabbitmq.com/" target="__blank") RabbitMQ]
+        li  Launch worker with "#nodemon ./bin/worker.js"
+        li  Process: Front sends instructions to worker queue &rarr; worker listens and proceed instructions &rarr; worker ack and send success message to the response channel &rarr; Front listens to this channel and updates view
+        li  User's information are generated with #[a(href="https://github.com/Marak/faker.js" target="__blank") faker]
+        li  Images are lazy rendered
+        li  Pages are loaded on scroll
+        li  CSS transition
+        li  Use native Javascript client
+      h3 Tips for test
+      ul
+        li  Enter user name to add single user, e.g "Rasta Popolos"
+        li  Enter "random n" to add n users randomly
+        li  Enter "truncate" to truncate table user
+        li  Enter "delete n" to delete the user with id = n; "delete m-n" to delete the user with id from m to n
+        li  You can chain actions with the separator " then ", e.g "truncate then random 10"
+      p
+        input#contact(type="text" placeholder="Add...")
+        span#microtime
+      p
+        ul#contactlist
+        div#scrollLoader  &nbsp;
+      p #{error}
+      footer

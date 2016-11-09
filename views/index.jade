@@ -1,0 +1,32 @@
+extends layout
+
+block content
+    section
+        article
+            header
+                h1  Testing NodeJs - Express - Jade
+                div.flatbuttoncontainer
+            h3 Content
+            ul
+                li  Test NodeJs with #[a(href="http://socket.io/" target="__blank") socket.io], mysql, token...
+                li  NodeJs best practices
+                li  ES6
+                li  #[a(href="http://expressjs.com/fr/" target="__blank") Express]
+                li  Asynchronous : promise, #[a(href="https://github.com/tj/co" target="__blank") coroutines] yield, await
+                li  Queue manager interaction : #[a(href="http://redis.io/") Redis] pub/sub and #[a(href="https://www.rabbitmq.com/" target="__blank") RabbitMQ]
+                li  Restfull service
+                li  Trying flexbox
+                li  Trying flat design (lol)
+                li  Use only native Javascript client + some polyfills for cross compatibility : #[a(href="https://github.com/WICG/IntersectionObserver" target="__blank") IntersectionObserver], #[a(href="https://github.com/mtsyganov/queryselector-polyfill" taget="__blank") queryselector]
+
+            h3  Prerequisite and installation
+            ul
+                li  Configurations are in "./config.js"
+                li  Need mysql database, dump is available at ./test.sql
+                li  Need redis server on localhost:6379 with default configuration
+                li  Need RabbitMQ server on localhost:5672 with default configuration
+                li  Install node_modules with "#npm install"
+                li  Launch app with "#npm start" or "#nodemon start" or "#pm2 start bin/www"
+                li  Launch worker for RabbitMQ with "#nodemon ./bin/worker.js"
+                li  Static resources (css and js) are served by "staticCdnUrl" in config file
+            footer

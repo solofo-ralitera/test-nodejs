@@ -1,0 +1,317 @@
+@charset "utf-8";
+
+html,
+body {
+  height: 100%;
+  margin : 0px;
+}
+body {
+  font: 1em "Arial Unicode MS", Helvetica, Arial, sans-serif;
+  background-color:#f3f3f3;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.container {
+  display:flex;
+
+  /*
+  Direction
+    row : organisés sur une ligne (par défaut)
+    column : organisés sur une colonne
+    row-reverse : organisés sur une ligne, mais en ordre inversé
+    column-reverse : organisés sur une colonne, mais en ordre inversé
+  */
+  flex-direction: column;
+
+  /*
+  Detour à la ligne
+    nowrap : pas de retour à la ligne (par défaut)
+    wrap : les éléments vont à la ligne lorsqu'il n'y a plus la place
+    wrap-reverse : les éléments vont à la ligne lorsqu'il n'y a plus la place en sens inverse
+  */
+  flex-wrap: nowrap;
+
+  /*
+  Aligner sur l'axe principal (H or V, define by flex-direction)
+    flex-start : alignés au début (par défaut)
+    flex-end : alignés à la fin
+    center : alignés au centre
+    space-between : les éléments sont étirés sur tout l'axe (il y a de l'espace entre eux)
+    space-around : idem, les éléments sont étirés sur tout l'axe, mais ils laissent aussi de l'espace sur les extrémités
+  */
+  justify-content: space-between;
+
+  /*
+  Aligner sur l'axe secondaire (axe principale reverse)
+    stretch : les éléments sont étirés sur tout l'axe (valeur par défaut)
+    flex-start : alignés au début
+    flex-end : alignés à la fin
+    center : alignés au centre
+    baseline : alignés sur la ligne de base (semblable à flex-start)
+  */
+  align-items: stretch;
+}
+
+/* Main layout */
+header.main {
+  background: #658db5;
+  width: 100%;
+}
+div.content {
+  align-self: stretch;
+  flex-grow: 1;
+  margin : 1.5em 2.2em;
+}
+footer.main {
+  background: #658db5;
+  position: fixed;
+  bottom : 0;
+  width: 100%;
+  color: #f8f8f8;
+  padding: 0.5em;
+}
+
+/* Menu */
+nav.main {
+  position: fixed;
+  top: 0;
+}
+nav.main ul
+{
+  margin : 0px;
+  padding : 0px;
+  height : 3em;
+
+  display:flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content : flex-start;
+  align-items: stretch;
+}
+nav.main ul li {
+  line-height: 3em;
+  list-style: none;
+  font-weight:bolder;
+  padding: 0em;
+  margin : 0em 1em;
+}
+nav.main ul li a {
+  color: #f8f8f8;
+  cursor: pointer;
+}
+nav.main ul.aggreg {
+  position: fixed;
+  top:0;
+}
+nav.main ul.aggreg li.aggreg {
+  margin : 0em;
+}
+nav.main ul.aggreg li a.aggreg {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height : 100%;
+  padding : 0em 0.5em;
+  text-align: center;
+  color: #658db5;
+}
+nav.main ul.aggreg li a.aggreg:hover {
+  color : white;
+  background-color: #658db5;
+}
+nav.main ul#mainmenu {
+  background-color: #658db5;
+  position: fixed;
+  top:3em;
+}
+nav.main ul#mainmenu li{
+  margin : 0em;
+}
+nav.main ul#mainmenu li a{
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height : 100%;
+  padding : 0em 0.5em;
+  background-color: #658db5;
+  min-width: 10em;
+}
+nav.main ul#mainmenu li a:hover {
+  color: #658db5;
+  background-color: white;
+}
+input[type=text] {
+  width: 90%;
+  padding : 0.5em;
+  font-size: 1em;
+}
+
+#contactlist {
+  margin : 0px;
+  padding : 0px;
+
+  display : flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content : stretch;
+}
+
+#contactlist li {
+  list-style: none;
+  padding : 5px;
+  margin : 5px;
+  text-align: center;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: #658db5;
+  /* flex-grow flex-shrink flex-basis */
+  -webkit-flex: 1 1 auto; /* Safari 6.1+ */
+  -ms-flex: 1 1 auto; /* IE 10 */
+  flex: 1 1 auto;
+
+  border-radius:2px;
+  -webkit-border-radius:2px;
+  -moz-border-radius:2px;
+}
+#contactlist .contactlist-item-name {
+  font-weight:bold;
+}
+#contactlist .contactlist-item-detail {
+  font-size: 0.8em;
+}
+#contactlist .contactlist-item img.contactlist-item-image {
+  min-width: 128px;
+  min-height: 128px;
+
+  border-radius:50%;
+  -webkit-border-radius:50%;
+  -moz-border-radius:50%;
+  transition: all 0.2s;
+
+  border : 6px solid rgba(101, 141, 181, 0.5);
+  vertical-align: middle;
+}
+#contactlist .contactlist-item img.contactlist-item-image:hover {
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  border : 6px solid rgba(101, 141, 181, 0);
+}
+#contactlist .contactlist-item img.contactlist-item-image.error {
+  content : "error"
+}
+/* Blink animation for error */
+@-webkit-keyframes color_change {
+  from { background-color: gold; }
+  to { background-color: white; }
+}
+@-moz-keyframes color_change {
+  from { background-color: gold; }
+  to { background-color: white; }
+}
+@-ms-keyframes color_change {
+  from { background-color: gold; }
+  to { background-color: white; }
+}
+@-o-keyframes color_change {
+  from { background-color: gold; }
+  to { background-color: white; }
+}
+@keyframes color_change {
+  from { background-color: gold; }
+  to { background-color: white; }
+}
+.erroranimation {
+  -webkit-animation: color_change 1s infinite alternate;
+  -moz-animation: color_change 1s infinite alternate;
+  -ms-animation: color_change 1s infinite alternate;
+  -o-animation: color_change 1s infinite alternate;
+  animation: color_change 1s infinite alternate;
+}
+
+/* Black console like */
+#channelconsole, .console {
+  font-family:Courier;
+  color: #CCCCCC;
+  background: #000000;
+  border: 3px double #CCCCCC;
+  padding: 10px;
+  font-size : 0.8em;
+}
+
+/* Flat design */
+.flatbuttoncontainer {
+  margin:auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0em;
+}
+.flatbutton {
+  min-width: 150px;
+  min-height: 100px;
+  margin : 0.1em;
+
+  display : flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items: stretch;
+
+  /* flex-grow flex-shrink flex-basis */
+  -webkit-flex: 1 1 auto; /* Safari 6.1+ */
+  -ms-flex: 1 1 auto; /* IE 10 */
+  flex: 1 1 auto;
+
+  border-width:1px;
+  border-style: solid;
+
+  border-radius:2px;
+  -webkit-border-radius:2px;
+  -moz-border-radius:2px;
+}
+.flatbutton a{
+  display: block;
+  text-align: center;
+  font-size: 1.2em;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+  line-height : 7em;
+  transition: all 0.3s;
+}
+.flatbutton a:hover {
+  background-color: white;
+  color: #658db5;
+}
+/*
+.flatbutton:nth-child(1) {
+  border: 1px solid chocolate;
+  background-color: #FF5B57;
+}
+.flatbutton:nth-child(2) {
+  border: 1px solid #11d231;
+  background-color: #7DE25C;
+}
+.flatbutton:nth-child(3) {
+  border: 1px solid #d2a214;
+  background-color: #F9C732;
+}
+.flatbutton:nth-child(4) {
+  border: 1px solid #d216bc;
+  background-color: #BA1BF4;
+}
+.flatbutton:nth-child(5) {
+  border: 1px solid #04a9c6;
+  background-color: #3FC6C2;
+}
+*/
+

@@ -1,0 +1,36 @@
+doctype html
+html(dir="ltr" lang="en-US")
+  head
+    meta(http-equiv="Charset" content="utf-8")
+    meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+    meta(name="language" content="en-US")
+    meta(http-equiv="Content-Language" content="English")
+
+    title= title
+    link(rel="stylesheet" href="#{staticUrl}/stylesheets/style.css")
+
+    script(src="/socket.io/socket.io.js")
+    script(src="#{staticUrl}/javascripts/polyfill.js")
+    script(src="#{staticUrl}/javascripts/layout.js")
+
+  body.container
+    nav.main
+      ul.aggreg
+        li.aggreg
+          a#aggreg.aggreg  ☰
+      ul#mainmenu(style="display:none;")
+        li
+          a(href="/") Accueil
+        li
+          a(href="/socket")  Socket
+        li
+          a(href="/rest")  Rest
+        li
+          a(href="/redis")  Redis
+        li
+          a(href="/rabbitmq")  RabbitMQ
+    header.main
+    div.content
+      block content
+    footer.main
+      div testing 2016 techs - powered by - footer

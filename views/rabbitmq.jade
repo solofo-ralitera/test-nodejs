@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    script.
+        function addConsole(message) {
+            document.getElementById("channelconsole").innerHTML += "<div>" + message + "</div>";
+        }
+        
+        window.onload = (function(prtLoad) {
+            if(prtLoad) prtLoad();
+
+            var socket = io();
+
+            socket.on('rabbitmq-channel-error', function (data) {
+                addConsole("Connection error, is RabbitMQ running on the server ?");
+            });
+
+            socket.on('rabbitmq-channel-binding', function (data) {
+                addConsole("Binding channel " + data.channel + "");
+                addConsole("Listening " + ((data.binding) ? "the key " + data.binding : "to all binding key") + "...");
+            });
+
+            socket.on('rabbitmq-channel-message', function (data) {
+                addConsole("&nbsp;&nbsp;&nbsp;&nbsp;Message on channel " + data.channel + " : " + data.message + "");
+                highLightBody();
+            });
+        }).bind(null, window.onload);
+    section
+        article
+            header
+                h1   Testing NodeJs - Express - RabbitMQ
+                div.flatbuttoncontainer
+
+            h3 Content
+            p   Test RabbitMQ driven by NodeJS
+            ul
+                li  Work queues
+                li  Exchange
+                li  Pub/sub broadcast, routing direct/topic
+                li  TODO : Ack & RPC
+                li  See socket menu for more applications
+            p.
+                * Use RabbitMQ console/manager (available <a href="http://192.168.33.78:15672/" target="__blank">here</a>) to test
+            form(action="#" method="post" target="frameadd" accept-charset="utf-8")
+                input#rabbitmqsend(type="text" name="message" placeholder="Publish on queue hello...")
+                iframe(name="frameadd" style="display:none;" src="")
+                br
+            p   Console
+                div#channelconsole
+            footer

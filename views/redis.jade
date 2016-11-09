@@ -1,0 +1,54 @@
+extends layout
+
+block content
+    script.
+        function addConsole(message) {
+            document.getElementById("channelconsole").innerHTML += "<div>"+ message +"</div>";
+        }
+
+        window.onload = (function(prtLoad) {
+            if(prtLoad) prtLoad();
+
+            var socket = io();
+
+            socket.on('redis-channel-subscribe', function(data) {
+                addConsole("SUBSCRIBED to " + data.channel + " (" + data.count + ")");
+                addConsole("Listening for PUBLISH...");
+            });
+
+            socket.on('redis-channel-message', function(data) {
+                addConsole("&nbsp;&nbsp;&nbsp;&nbsp;Message on channel " + data.channel + " : " + data.message + "");
+                highLightBody();
+            });
+
+            socket.on('redis-channel-error', function(data) {
+                addConsole("Redis error : <span style='color:red'>" + data.errno + "</span>, is redis running on the server ?");
+            });
+
+            document.getElementById("redispublish").onkeydown = function(oKey) {
+                if(oKey.keyCode == 13) {
+                    socket.emit('redis-channel-publish', {
+                        channel: "demo",
+                        message : this.value
+                    });
+                    this.value = "";
+                }
+            };
+        }).bind(null, window.onload);
+    section
+        article
+            header
+                h1   Testing NodeJs - Express - Redis pub/sub - Socket
+                div.flatbuttoncontainer
+
+            h3 Content
+            p   Test Redis pub/sub feature driven by NodeJS
+            p   * Use Redis console to test :
+            ul
+                li  PUBLISH demo "xxxxxxx" or
+                li  SUBSCRIBE demo
+            p
+                input#redispublish(type="text" placeholder="Publish on channel demo...")
+            p   Console
+                div#channelconsole
+            footer
